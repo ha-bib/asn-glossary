@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASN Glossary</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://i.ibb.co.com/M9QSjfy/zuma-revenge-logo.png">
+    <style>
+        body {
+            background-color: #FFF8F0;
+        }
+
+        .text-primary {
+            color: #FF6B35;
+        }
+
+        .bg-primary {
+            background-color: #FF6B35;
+        }
+
+        .bg-secondary {
+            background-color: #FFF4E1;
+        }
+
+        .highlight {
+            background-color: #f3e7d2;
+            /* Highlight color */
+            font-weight: bold;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-800">
+    <div class="container mx-auto p-6">
+
+        <!-- Floating search box -->
+        <div id="floating-search" class="fixed top-4 left-1/2 transform -translate-x-1/2 w-4/4 hidden" style="width: 100%;max-width: 750px;">
+            <input type="text" placeholder="🔎 Cari "
+                class="w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
+        </div>
+
+        <h1 class="text-3xl text-primary font-bold mb-4 text-center">Glossarium</h1>
+        <div class="mb-6">
+            <input type="text" id="search" placeholder="🔎 Cari "
+                class="w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
+        </div>
+        <div id="glossary-container" class="space-y-4"></div>
+    </div>
+
+    <script>
+        // Sample data array with title and description
+        const glossaryData = [{
+                title: "ASN",
+                description: "Aparatur Sipil Negara adalah profesi bagi pegawai negeri sipil dan pegawai pemerintah dengan perjanjian kerja yang bekerja pada instansi pemerintah."
+            }, {
+                title: "Pegawai ASN",
+                description: "Pegawai ASN adalah pegawai negeri sipil dan pegawai pemerintah dengan perjanjian kerja yang diangkat oleh pejabat pembina kepegawaian dan diserahi tugas dalam suatu jabatan pemerintahan atau diserahi tugas negara lainnya dan digaji berdasarkan peraturan perundang-undangan."
+            }, {
+                title: "PPPK",
+                description: "Pegawai Pemerintah dengan Perjanjian Kerja yang selanjutnya disingkat PPPK adalah warga negara Indonesia yang memenuhi syarat tertentu, yang diangkat berdasarkan perjanjian kerja untuk jangka waktu tertentu dalam rangka melaksanakan tugas pemerintahan."
+            }, {
+                title: "Jabatan",
+                description: "Jabatan adalah kedudukan yang menunjukkan tugas, tanggungjawab, wewenang, dan hak seseorang pegawai ASN dalam suatu satuan organisasi."
+            }, {
+                "title": "Jabatan Pimpinan Tinggi (JPT)",
+                "description": "Jabatan Pimpinan Tinggi adalah sekelompok jabatan tinggi pada instansi pemerintah."
+            }, {
+                "title": "Jabatan Administrasi (JA)",
+                "description": "Jabatan Administrasi adalah sekelompok jabatan yang berisi fungsi dan tugas berkaitan dengan pelayanan publik serta administrasi pemerintahan dan pembangunan."
+            }, {
+                title: "Jabatan Fungsional (JF)",
+                description: "Jabatan Fungsional adalah sekelompok jabatan yang berisi fungsi dan tugas berkaitan dengan pelayanan fungsional yang berdasarkan pada keahlian dan keterampilan tertentu."
+            }, {
+                title: "Kompetensi Manajerial",
+                description: "Kompetensi Manajerial adalah pengetahuan, keterampilan, dan sikap/perilaku yang dapat diamati, diukur, dikembangkan untuk memimpin dan/atau mengelola unit organisasi."
+            }, {
+                title: "Kompetensi Teknis",
+                description: "Kompetensi Teknis adalah pengetahuan, keterampilan, dan sikap/perilaku yang dapat diamati, diukur, dikembangkan yang spesifik berkaitan dengan bidang teknis jabatan."
+            }, {
+                title: "Kompetensi Sosial Kultural",
+                description: "Kompetensi Sosial Kultural adalah pengetahuan, keterampilan, dan sikap/perilaku yang dapat diamati, diukur, dikembangkan terkait dengan pengalaman berinteraksi dengan masyarakat majemuk dalam hal agama, suku dan budaya, perilaku, wawasan kebangsaan, etika, nilai-nilai, moral, emosi dan prinsip, yang harus dipenuhi oleh setiap pemegang jabatan untuk memperoleh hasil kerja sesuai dengan peran, fungsi dan jabatan."
+            }, {
+                title: "Pejabat Yang Berwenang (PYB)",
+                description: "Pejabat Yang Berwenang adalah pejabat yang mempunyai kewenangan melaksanakan proses pengangkatan, pemindahan, dan pemberhentian Pegawai ASN sesuai dengan ketentuan peraturan perundang-undangan."
+            }, {
+                title: "Pejabat Pembina Kepegawaian (PPK)",
+                description: "Pejabat Pembina Kepegawaian adalah pejabat yang mempunyai kewenangan menetapkan pengangkatan, pemindahan, dan pemberhentian Pegawai ASN dan pembinaan manajemen ASN di instansi pemerintah sesuai dengan ketentuan peraturan perundang-undangan."
+            }, {
+                title: "Pemutusan Hubungan Perjanjian Kerja",
+                description: "Pemutusan Hubungan Perjanjian Kerja sebagai PPPK adalah pemberhentian yang mengakibatkan seseorang kehilangan statusnya sebagai PPPK."
+            }, {
+                title: "Cuti PPPK",
+                description: "Cuti PPPK selanjutnya disebut dengan Cuti, adalah keadaan tidak masuk kerja yang diizinkan dalam jangka waktu tertentu."
+            }, {
+                title: "Badan Kepegawaian Negara (BKN)",
+                description: "Badan Kepegawaian Negara adalah lembaga pemerintah nonkementerian yang diberi kewenangan melakukan pembinaan dan menyelenggarakan manajemen ASN secara nasional sebagaimana diatur dalam undang-undang."
+            }, {
+                "title": "Pembinaan JF",
+                "description": "Pembinaan JF adalah upaya peningkatan dan pengendalian standar profesi JF yang meliputi kewenangan pengelolaan, prosedur, dan metodologi pelaksanaan tugas Pejabat Fungsional."
+            }, {
+                "title": "Evaluasi Kinerja Periodik",
+                "description": "Evaluasi Kinerja Periodik Pejabat Fungsional adalah proses di mana pejabat penilai kinerja mereviu keseluruhan hasil kerja dan perilaku kerja Pejabat Fungsional selama bulanan atau triwulanan dan menetapkan predikat kinerja periodik Pejabat Fungsional berdasarkan kuadran kinerja Pejabat Fungsional."
+            }, {
+                "title": "Evaluasi Kinerja Tahunan",
+                "description": "Evaluasi Kinerja Tahunan Pejabat Fungsional adalah proses di mana pejabat penilai kinerja mereviu keseluruhan hasil kerja dan perilaku kerja Pejabat Fungsional selama satu tahun kinerja dan menetapkan predikat kinerja tahunan Pejabat Fungsional berdasarkan kuadran kinerja Pejabat Fungsional."
+            }, {
+                "title": "Pimpinan",
+                "description": "Pimpinan adalah Pejabat Penilai Kinerja, pejabat lain dalam satu unit organisasi, lintas unit organisasi, lintas instansi pemerintah pemilik kinerja, dan/atau pejabat lain di luar instansi pemerintah di mana pegawai mendapat penugasan khusus."
+            }, {
+                "title": "Tim Penilai Kinerja PNS",
+                "description": "Tim Penilai Kinerja PNS adalah tim yang dibentuk oleh pejabat yang berwenang untuk memberikan pertimbangan kepada pejabat pembina kepegawaian atas usulan pengangkatan, pemindahan, dan pemberhentian dalam jabatan, pengembangan kompetensi, serta pemberian penghargaan bagi PNS."
+            }, {
+                "title": "Uji Kompetensi",
+                "description": "Uji Kompetensi adalah proses pengukuran dan penilaian terhadap kompetensi teknis, manajerial, dan sosio-kultural dari Pegawai ASN."
+            }, {
+                "title": "Perpindahan Horizontal",
+                "description": "Perpindahan Horizontal adalah perpindahan dari satu posisi jabatan ke posisi jabatan lain yang setara, baik dalam satu kelompok maupun antar kelompok JA, JF, atau JPT."
+            }, {
+                "title": "Perpindahan Vertikal",
+                "description": "Perpindahan Vertikal adalah perpindahan dari satu posisi jabatan ke posisi jabatan yang lebih tinggi dalam satu kelompok Jabatan Fungsional."
+            }, {
+                "title": "Perpindahan Diagonal",
+                "description": "Perpindahan Diagonal adalah perpindahan dari satu posisi jabatan ke posisi jabatan lain yang lebih tinggi antar kelompok JA, JF, atau JPT."
+            }, {
+                "title": "Pembinaan Jabatan Fungsional",
+                "description": "Pembinaan Jabatan Fungsional adalah upaya peningkatan dan pengendalian standar profesi Jabatan Fungsional yang meliputi kewenangan pengelolaan, prosedur, dan metodologi pelaksanaan tugas Pejabat Fungsional."
+            }, {
+                "title": "Ekspektasi Kinerja",
+                "description": "Ekspektasi Kinerja adalah harapan atas hasil kerja dan perilaku kerja Pegawai ASN."
+            }, {
+                "title": "Evaluasi Kinerja Periodik Pejabat Fungsional",
+                "description": "Evaluasi Kinerja Periodik Pejabat Fungsional adalah proses di mana pejabat penilai kinerja meninjau hasil kerja dan perilaku kerja Pejabat Fungsional secara bulanan atau triwulanan, lalu menetapkan predikat kinerja periodik berdasarkan kuadran kinerja."
+            }, {
+                "title": "Evaluasi Kinerja Tahunan Pejabat Fungsional",
+                "description": "Evaluasi Kinerja Tahunan Pejabat Fungsional adalah proses di mana pejabat penilai kinerja mereviu hasil kerja dan perilaku kerja Pejabat Fungsional selama satu tahun dan menetapkan predikat kinerja tahunan berdasarkan kuadran kinerja."
+            }, {
+                "title": "Predikat Kinerja",
+                "description": "Predikat Kinerja adalah predikat yang ditetapkan oleh Pejabat Penilai Kinerja berdasarkan hasil evaluasi kinerja Pegawai ASN baik secara periodik maupun tahunan."
+            }, {
+                "title": "Pejabat Penilai Kinerja",
+                "description": "Pejabat Penilai Kinerja adalah atasan langsung Pejabat Fungsional yang diberi kewenangan menilai kinerja dengan ketentuan paling rendah pejabat pengawas atau pejabat lain dengan pendelegasian kewenangan."
+            }, {
+                "title": "Angka Kredit",
+                "description": "Angka Kredit adalah nilai kuantitatif dari hasil kerja Pejabat Fungsional."
+            }, {
+                "title": "Angka Kredit Kumulatif",
+                "description": "Angka Kredit Kumulatif adalah akumulasi nilai Angka Kredit yang harus dicapai oleh Pejabat Fungsional sebagai syarat kenaikan pangkat dan jabatan."
+            }, {
+                "title": "Unit Organisasi",
+                "description": "Unit Organisasi adalah bagian dari struktur organisasi yang dapat dipimpin oleh Pejabat Pimpinan Tinggi, pejabat administrator, pejabat pengawas, atau Pejabat Fungsional yang memimpin unit kerja mandiri."
+            }, {
+                "title": "Instansi Pemerintah",
+                "description": "Instansi Pemerintah terdiri dari instansi pusat dan instansi daerah."
+            }, {
+                "title": "Instansi Pusat",
+                "description": "Instansi Pusat adalah kementerian, lembaga pemerintah nonkementerian, kesekretariatan lembaga negara, dan kesekretariatan lembaga nonstruktural."
+            }, {
+                "title": "Instansi Daerah",
+                "description": "Instansi Daerah adalah perangkat daerah provinsi dan perangkat daerah kabupaten/kota yang meliputi sekretariat daerah, sekretariat DPRD, dinas daerah, dan lembaga teknis daerah."
+            }, {
+                "title": "Menteri",
+                "description": "Menteri adalah menteri yang menyelenggarakan urusan pemerintahan di bidang aparatur negara."
+            }, {
+                "title": "Pegawai Pemerintah dengan Perjanjian Kerja (PPPK)",
+                "description": "Pegawai Pemerintah dengan Perjanjian Kerja (adalah warga negara Indonesia yang memenuhi syarat tertentu, yang diangkat berdasarkan perjanjian kerja untuk jangka waktu tertentu dalam rangka melaksanakan tugas pemerintahan."
+            }, {
+                "title": "Manajemen ASN",
+                "description": "Manajemen ASN adalah pengelolaan ASN untuk menghasilkan Pegawai ASN yang profesional, memiliki nilai dasar, etika profesi, bebas dari intervensi politik, bersih dari praktik korupsi, kolusi, dan nepotisme."
+            }, {
+                "title": "Pejabat Pimpinan Tinggi",
+                "description": "Pejabat Pimpinan Tinggi adalah Pegawai ASN yang menduduki Jabatan Pimpinan Tinggi (JPT)."
+            }, {
+                "title": "Pejabat Administrasi",
+                "description": "Pejabat Administrasi adalah Pegawai ASN yang menduduki Jabatan Administrasi pada instansi pemerintah."
+            }, {
+                "title": "Pejabat Fungsional",
+                "description": "Pejabat Fungsional adalah Pegawai ASN yang menduduki Jabatan Fungsional pada instansi pemerintah."
+            }, {
+                "title": "Menteri",
+                "description": "Menteri adalah menteri yang menyelenggarakan urusan pemerintahan di bidang pendayagunaan aparatur negara."
+            }, {
+                "title": "Komisi ASN (KASN)",
+                "description": "KASN merupakan lembaga nonstruktural yang mandiri dan bebas dari intervensi politik untuk menciptakan Pegawai ASN yang profesional dan berkinerja, memberikan pelayanan secara adil dan netral, serta menjadi perekat dan pemersatu bangsa."
+            }, {
+                "title": "Lembaga Administrasi Negara (LAN)",
+                "description": "Lembaga Administrasi Negara adalah lembaga pemerintah nonkementerian yang diberi kewenangan melakukan pengkajian dan pendidikan dan pelatihan ASN sebagaimana diatur dalam undang-undang ini."
+            }, {
+                "title": "Asas Kesejahteraan",
+                "description": "Penyelenggaraan ASN diarahkan untuk mewujudkan peningkatan kualitas hidup Pegawai ASN."
+            }, {
+                "title": "Asas Profesionalitas",
+                "description": "Mengutamakan keahlian yang berlandaskan kode etik dan ketentuan peraturan perundang-undangan."
+            }, {
+                "title": "Asas Proporsionalitas",
+                "description": "Mengutamakan keseimbangan antara hak dan kewajiban Pegawai ASN."
+            }, {
+                "title": "Asas Keterpaduan",
+                "description": "Pengelolaan Pegawai ASN didasarkan pada satu sistem pengelolaan yang terpadu secara nasional."
+            }, {
+                "title": "Asas Delegasi",
+                "description": "Sebagian kewenangan pengelolaan Pegawai ASN dapat didelegasikan pelaksanaannya kepada kementerian, lembaga pemerintah nonkementerian, dan pemerintah daerah."
+            }, {
+                "title": "Asas Netralitas",
+                "description": "Setiap Pegawai ASN tidak berpihak dari segala bentuk pengaruh manapun dan tidak memihak kepada kepentingan siapapun."
+            }, {
+                "title": "Asas Akuntabilitas",
+                "description": "Setiap kegiatan dan hasil akhir dari kegiatan Pegawai ASN harus dapat dipertanggungjawabkan kepada masyarakat sesuai dengan ketentuan peraturan perundang-undangan."
+            }, {
+                "title": "Asas Efektif dan Efisien",
+                "description": "Dalam menyelenggarakan Manajemen ASN sesuai dengan target atau tujuan dengan tepat waktu sesuai dengan perencanaan yang ditetapkan."
+            }, {
+                "title": "Asas Keterbukaan",
+                "description": "Dalam penyelenggaraan Manajemen ASN bersifat terbuka untuk publik."
+            }, {
+                "title": "Asas Nondiskriminatif",
+                "description": "Dalam penyelenggaraan Manajemen ASN, KASN tidak membedakan perlakuan berdasarkan jender, suku, agama, ras, dan golongan."
+            }, {
+                "title": "Asas Persatuan dan Kesatuan",
+                "description": "Pegawai ASN sebagai perekat Negara Kesatuan Republik Indonesia."
+            }, {
+                "title": "Asas Keadilan dan Kesetaraan",
+                "description": "Pengaturan penyelenggaraan ASN harus mencerminkan rasa keadilan dan kesamaan untuk memperoleh kesempatan akan fungsi dan peran sebagai Pegawai ASN."
+            }, {
+                "title": "Fungsi Pegawai ASN",
+                "description": "Pegawai ASN berfungsi sebagai:<br>a. pelaksana kebijakan publik;<br>b. pelayan publik; dan<br>c. perekat dan pemersatu bangsa."
+            }, {
+                "title": "Tugas Komisi ASN (KASN)",
+                "description": "KASN bertugas: <br>a. Menjaga netralitas Pegawai ASN;<br>b. Melakukan pengawasan atas pembinaan profesi ASN;<br>c. Melaporkan pengawasan dan evaluasi pelaksanaan kebijakan Manajemen ASN kepada Presiden."
+            }, {
+                "title": "Pengadaan PNS",
+                "description": "Pengadaan PNS dilakukan melalui tahapan:<br>A. Perencanaan;<br>B. Pengumuman lowongan;<br>C. Pelamaran;<br>D. Seleksi;<br>E. Pengumuman hasil seleksi;<br>F. Masa percobaan;<br>G. Pengangkatan menjadi PNS."
+            }, {
+                "title": "Pemberhentian Sementara sebagai PNS",
+                "description": "Pemberhentian yang mengakibatkan PNS kehilangan statusnya sebagai PNS untuk sementara waktu."
+            }, {
+                "title": "Pemberhentian Karena Mencapai Batas Usia Pensiun",
+                "description": "Batas usia di mana PNS harus diberhentikan dengan hormat dari status PNS:<br>a. 58 (lima puluh delapan) tahun bagi pejabat administrasi, pejabat fungsional ahli muda, pejabat fungsional ahli pertama, dan pejabat fungsional keterampilan;<br>b. 60 (enam puluh) tahun bagi pejabat pimpinan tinggi dan pejabat fungsional madya; dan<br>c. 65 (enam puluh lima) tahun bagi PNS yang memangku pejabat fungsional ahli utama."
+            },
+            {
+                "title": "Pemberhentian Karena Perampingan Organisasi atau Kebijakan Pemerintah",
+                "description": "Pemberhentian PNS karena perampingan organisasi, dengan ketentuan:<br>a. PNS yang bersangkutan disalurkan pada Instansi Pemerintah lain;<br>b. Jika PNS tidak dapat disalurkan maka PNS tersebut diberhentikan dengan hormat dengan mendapat hak kepegawaian sesuai dengan ketentuan peraturan perundang-undangan, jika PNS telah mencapai usia 50 (lima puluh) tahun dan masa ke l0 (sepuluh) tahun;<br>c. Jika PNS tidak dapat disalurkan, belum mencapai usia 50 (lima puluh) tahun, dan masa kerja kurang dari l0 (sepuluh) tahun maka diberikan uang tunggu paling lama 5 (lima) tahun. Apabila sampai dengan 5 (lima) tahun PNS tidak dapat disalurkan maka PNS tersebut diberhentikan dengan hormat dan diberikan hak kepegawaian sesuai dengan ketentuan peraturan perundang-undangan.<br>d. Dalam hal pada saat berakhirnya pemberian uang tunggu PNS belum berusia 50 (lima puluh) tahun, jaminan pensiun bagi PNS mulai diberikan pada saat mencapai usia 50 (lima puluh) tahun."
+            },
+            {
+                "title": "Pemberhentian Karena Tidak Cakap Jasmani dan/atau Rohani",
+                "description": "PNS yang tidak cakap jasmani dan/atau rohani diberhentikan dengan hormat apabila:<br>a. Tidak dapat bekerja lagi dalam semua jabatan karena kesehatannya;<br>b. Menderita penyakit atau kelainan yang berbahaya bagi dirinya sendiri atau lingkungan kerjanya;<br>c. Tidak mampu bekerja kembali setelah berakhirnya cuti sakit.<br>Ketentuan mengenai tidak cakap jasmani dan/atau rohani sebagaimana dimaksud berdasarkan hasil pemeriksaan tim penguji kesehatan."
+            },
+            {
+                "title": "Pemberhentian Karena Meninggal Dunia, Tewas, atau Hilang",
+                "description": "PNS yang meninggal dunia atau tewas diberhentikan dengan hormat sebagai PNS dengan mendapat hak kepegawaian sesuai dengan ketentuan peraturan perundang-undangan.<br> ---MENINGGAL DUNIA<br>a. meninggalnya tidak dalam dan karena menjalankan tugas;<br>b. meninggalnya sedang menjalani masa uang tunggu;<br>c. meninggalnya pada waktu menjalani cuti di luar tanggungan negara.<br>---TEWAS<br>a. dalam dan karena menjalankan tugas dan kewajibannya;<br>b. dalam keadaan lain yang ada hubungannya dengan dinas;<br>c. langsung diakibatkan oleh luka atau cacat rohani atau jasmani yang didapat dalam dan karena menjalankan tugas;<br>d. karena perbuatan anasir yang tidak bertanggung jawab.<br>---HILANG<br>a. tidak diketahui keberadaannya;<br>b. tidak diketahui masih hidup atau telah meninggal dunia.<br>(2) PNS yang hilang dianggap telah meninggal dunia dan dapat diberhentikan dengan hormat sebagai PNS pada akhir bulan ke-12 sejak dinyatakan hilang.<br>(3) Pernyataan hilang dibuat oleh PPK berdasarkan surat keterangan atau berita acara pemeriksaan dari pihak Kepolisian Negara Republik Indonesia."
+            }, {
+                "title": "Diberhentikan Tidak Dengan Hormat",
+                "description": "PNS diberhentikan tidak dengan hormat apabila:<br>\na. melakukan penyelewengan terhadap Pancasila dan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945;<br>\nb. dipidana dengan pidana penjara atau kurungan berdasarkan putusan pengadilan yang telah memiliki kekuatan hukum tetap karena melakukan tindak pidana kejahatan Jabatan atau tindak pidana kejahatan yang ada hubungannya dengan Jabatan dan/atau pidana umum;<br>\nc. menjadi anggota dan/atau pengurus partai politik;<br>\nd. dipidana dengan pidana penjara berdasarkan putusan pengadilan yang telah memiliki kekuatan hukum tetap karena melakukan tindak pidana dengan hukuman pidana penjara paling singkat 2 (dua) tahun dan pidana yang dilakukan dengan berencana.<br> <b>Note:</b> <br> PNS dapat diberhentikan dengan hormat karena dihukum penjara berdasarkan putusan pengadilan yang telah memiliki kekuatan hukum tetap karena melakukan tindak pidana dengan hukuman pidana penjara paling singkat 2 (dua) tahun dan pidana yang dilakukan tidak berencana."
+            },
+            {
+                "title": "Pemberhentian Karena Pelanggaran Disiplin",
+                "description": "Pasal 253 (1) PNS diberhentikan dengan hormat tidak atas permintaan sendiri apabila melakukan pelanggaran disiplin PNS tingkat berat.<br>Pemberhentian sebagaimana dimaksud pada ayat (1) dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan yang mengatur mengenai disiplin PNS."
+            },
+            {
+                "title": "Pemberhentian Karena Hal Lain",
+                "description": "Pasal 257<br>1. PNS yang telah selesai menjalankan cuti di luar tanggungan negara wajib melaporkan diri secara tertulis kepada instansi induknya dalam waktu paling lama 1 (satu) bulan setelah selesai menjalankan cuti di luar tanggungan negara.<br>2. PNS yang tidak melaporkan diri secara tertulis sebagaimana dimaksud, diberhentikan dengan hormat sesuai dengan ketentuan peraturan perundang-undangan.<br>3. PNS yang melaporkan diri sebagaimana dimaksud, tetapi tidak dapat diangkat dalam Jabatan pada instansi induknya, disalurkan pada instansi lain.<br>4. PNS sebagaimana dimaksud diaktifkan kembali sebagai PNS sesuai Jabatan yang tersedia.<br>5. Penyaluran pada instansi lain dilakukan oleh PPK setelah berkoordinasi dengan Kepala BKN.<br>6. PNS yang tidak dapat disalurkan dalam waktu paling lama 1 (satu) tahun diberhentikan dengan hormat sebagai PNS.<br>7. PNS yang diberhentikan dengan hormat diberikan hak kepegawaian sesuai ketentuan peraturan perundang-undangan."
+            },
+            {
+                "title": "Sistem Merit",
+                "description": "Kebijakan dan manajemen ASN yang berdasarkan pada kualifikasi, kompetensi, dan kinerja secara adil dan wajar tanpa membedakan latar belakang politik, ras, warna kulit, agama, asal usul, jenis kelamin, status pernikahan, umur, atau kondisi kecacatan."
+            }, {
+                "title": "Pengisian JPT secara Terbuka (Seleksi Terbuka)",
+                "description": "Proses pengisian Jabatan Pimpinan Tinggi yang dilakukan melalui kompetisi secara terbuka."
+            }, {
+                "title": "Pendidikan dan Pelatihan Terintegrasi (Pelatihan Prajabatan)",
+                "description": "Proses pelatihan untuk membangun integritas moral, kejujuran, semangat dan motivasi nasionalisme, karakter kepribadian yang unggul dan bertanggung jawab, serta memperkuat profesionalisme dan kompetensi bagi calon PNS pada masa percobaan."
+            }, {
+                "title": "Cuti PNS",
+                "description": "Keadaan tidak masuk kerja yang diizinkan dalam jangka waktu tertentu."
+            }, {
+                "title": "Sistem Informasi ASN",
+                "description": "Rangkaian informasi dan data mengenai Pegawai ASN yang disusun secara sistematis, menyeluruh, dan terintegrasi berbasis teknologi."
+            }, {
+                "title": "Sekolah Kader",
+                "description": "Sistem pengembangan kompetensi yang bertujuan untuk menyiapkan pejabat administrator melalui jalur percepatan peningkatan jabatan."
+            },
+            {
+                "title": "Gaji, Tunjangan, dan Fasilitas PNS",
+                "description": "Selain gaji, PNS juga menerima tunjangan dan fasilitas tambahan yang mencakup tunjangan kinerja dan tunjangan kemahalan."
+            },
+            {
+                "title": "Tunjangan Kinerja dan Kemahalan",
+                "description": "Tunjangan kinerja diberikan sesuai dengan pencapaian kinerja, sedangkan tunjangan kemahalan disesuaikan dengan tingkat kemahalan di daerah masing-masing berdasarkan indeks harga yang berlaku."
+            },
+            {
+                "title": "Pembiayaan Tunjangan PNS",
+                "description": "Tunjangan untuk PNS yang bekerja di pemerintah pusat dibebankan pada APBN, sementara tunjangan bagi PNS di pemerintahan daerah dibebankan pada APBD."
+            },
+            {
+                "title": "Penghargaan PNS",
+                "description": "PNS yang telah menunjukkan kesetiaan, pengabdian, kecakapan, kejujuran, kedisiplinan, dan prestasi kerja dalam melaksanakan tugasnya dapat diberikan penghargaan. Penghargaan dapat berupa pemberian:<br>a. Tanda kehormatan;<br>b. kenaikan pangkat istimewa;<br>c. Kesempatan prioritas untuk pengembangan kompetensi; dan/atau<br>d. Kesempatan menghadiri acara resmi dan/atau acara kenegaraan."
+            },
+            {
+                "title": "Pemberhentian Dengan Hormat",
+                "description": "PNS diberhentikan dengan hormat karena:<br>a. Meninggal dunia;<br>b. Atas permintaan sendiri;<br>c. Mencapai batas usia pensiun;<br>d. Perampingan organisasi atau kebijakan pemerintah yang mengakibatkan pensiun dini;<br>e. Tidak cakap jasmani dan/atau rohani sehingga tidak dapat menjalankan tugas dan kewajiban."
+            },
+
+
+        ];
+
+        $(document).ready(function () {
+            // Sort glossary data alphabetically by title
+            const sortedData = glossaryData.sort((a, b) => a.title.localeCompare(b.title));
+
+            // Function to highlight matched text
+            function highlightText(text, searchText) {
+                const regex = new RegExp(`(${searchText})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            // Function to display glossary items
+            function displayGlossary(data, searchText = '') {
+                $("#glossary-container").empty(); // Clear existing items
+                data.forEach((item, index) => {
+                    // Apply highlighting if there is a search term
+                    const title = searchText ? highlightText(item.title, searchText) : item.title;
+                    const description = searchText ? highlightText(item.description, searchText) : item.description;
+
+                    const glossaryItem = `
+                        <div class="p-4 bg-secondary rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold text-primary mb-2">${index + 1}. ${title}</h2>
+                            <p class="text-gray-700">${description}</p>
+                        </div>
+                    `;
+                    $("#glossary-container").append(glossaryItem);
+                });
+            }
+
+            // Initial display of all items
+            displayGlossary(sortedData);
+
+            // Search functionality
+            $("#search").on("input", function () {
+                const searchText = $(this).val().toLowerCase();
+                const searchTextWithoutSpace = searchText.trim();
+                const filteredData = sortedData.filter(item =>
+                    item.title.toLowerCase().includes(searchTextWithoutSpace) ||
+                    item.description.toLowerCase().includes(searchTextWithoutSpace)
+                );
+
+                displayGlossary(filteredData, searchText);
+            });
+            const searchInput = document.getElementById('search');
+            const floatingSearch = document.getElementById('floating-search');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) { // Show floating box after scrolling 100px
+                    floatingSearch.classList.remove('hidden');
+                } else {
+                    floatingSearch.classList.add('hidden');
+                }
+            });
+
+            // Sync input between the two search boxes
+            searchInput.addEventListener('input', (e) => {
+                floatingSearch.querySelector('input').value = e.target.value;
+
+            });
+            floatingSearch.querySelector('input').addEventListener('input', (e) => {
+                searchInput.value = e.target.value;
+                const event = new Event('input');
+                searchInput.dispatchEvent(event);
+            });
+        });
+    </script>
+</body>
+
+</html>
