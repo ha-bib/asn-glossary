@@ -49,7 +49,7 @@
     <div class="container mx-auto p-6">
 
         <!-- Floating search box -->
-        <div id="floating-search" class="fixed top-4 left-1/2 transform -translate-x-1/2 w-4/4 hidden" style="width: 100%;max-width: 750px;">
+        <div id="floating-search" class="fixed top-4 left-1/2 transform -translate-x-1/2 w-4/4 hidden p-6" style="width: 100%;max-width: 750px;">
             <input type="text" placeholder="🔎 Cari "
                 class="search w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
         </div>
@@ -454,7 +454,7 @@
 
         $(document).ready(function () {
             // Sort glossary data alphabetically by title
-            const sortedData = glossaryData.sort((a, b) => a.title.localeCompare(b.title));
+            const sortedData = glossaryData.sort((a, b) => b.title.localeCompare(a.title));
 
             // Function to highlight matched text
             function highlightText(text, searchText) {
@@ -488,14 +488,14 @@
                             return 0;
                         }
                     })
-                    .forEach((item) => {
+                    .forEach((item, index) => {
                         // Apply highlighting if there is a search term
                         const title = searchText ? highlightText(item.title, searchText) : item.title;
                         const description = searchText ? highlightText(item.description, searchText) : item.description;
 
                         const glossaryItem = `
                             <div data-title="${item.title}" class="p-4 bg-secondary rounded-lg shadow-md ${localStorage.getItem(`glossary-item-${item.title}`) === 'true' ? 'active' : ''}">
-                                <h2 class="text-xl font-semibold text-primary mb-2">${title}</h2>
+                                <h2 class="text-xl font-semibold text-primary mb-2">${index + 1}. ${title}</h2>
                                 <p class="text-gray-700">${description}</p>
                             </div>
                         `;
