@@ -25,6 +25,10 @@
             background-color: #FFF4E1;
         }
 
+        .active {
+            background-color: #e3ffe1;
+        }
+
         .highlight {
             background-color: #f3e7d2;
             /* Highlight color */
@@ -47,96 +51,97 @@
         <!-- Floating search box -->
         <div id="floating-search" class="fixed top-4 left-1/2 transform -translate-x-1/2 w-4/4 hidden" style="width: 100%;max-width: 750px;">
             <input type="text" placeholder="🔎 Cari "
-                class="w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
+                class="search w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
         </div>
 
         <h1 class="text-3xl text-primary font-bold mb-4 text-center">Glossarium</h1>
+        <div class="mb-6" id="fixed-search">
+            <input type="text" placeholder="🔎 Cari "
+                class="search w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
+        </div>
         <ul class="list-disc pl-6 mb-6">
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">1. Jabatan Fungsional Pranata SDM Aparatur</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">2. Pengelolaan Administrasi Pelayanan Kepegawaian ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">3. Penyusunan dan Penetapan Kebutuhan ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">4. Pengadaan ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">5. Pangkat dan Jabatan ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">6. Pengembangan Karier ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">7. Pola Karier ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">8. Promosi ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">9. Mutasi ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">10. Penugasan ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">11. Pengembangan Kompetensi ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">12. Penilaian Kinerja ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">13. Disiplin ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">14. Penghargaan ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">15. Penggajian, Tunjangan, dan Fasilitas ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">16. Pemberhentian ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">17. Jaminan Pensiun dan Jaminan Hari Tua ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">18. Perlindungan ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">19. Cuti ASN</span>
             </li>
             <li class="flex items-center">
-                <input type="checkbox" class="mr-2" disabled checked>
+                <input type="checkbox" class="mr-2">
                 <span class="text-gray-700">20. Sistem Informasi ASN</span>
             </li>
         </ul>
-        <div class="mb-6">
-            <input type="text" id="search" placeholder="🔎 Cari "
-                class="w-full px-4 py-2 border border-orange-400 rounded-lg shadow-lg bg-secondary text-gray-700 focus:outline-none focus:ring-3 focus:ring-dark">
-        </div>
+
         <div id="glossary-container" class="space-y-4"></div>
     </div>
 
@@ -154,6 +159,9 @@
             }, {
                 title: "Jabatan",
                 description: "Jabatan adalah kedudukan yang menunjukkan tugas, tanggungjawab, wewenang, dan hak seseorang pegawai ASN dalam suatu satuan organisasi."
+            }, {
+                "title": "Jabatan ASN",
+                "description": "Jabatan ASN terdiri atas: a. Jabatan Administrasi<br>b. Jabatan Fungsional<br>c. Jabatan Pimpinan Tinggi."
             }, {
                 "title": "Jabatan Pimpinan Tinggi (JPT)",
                 "description": "Jabatan Pimpinan Tinggi adalah sekelompok jabatan tinggi pada instansi pemerintah."
@@ -181,9 +189,6 @@
             }, {
                 title: "Pemutusan Hubungan Perjanjian Kerja",
                 description: "Pemutusan Hubungan Perjanjian Kerja sebagai PPPK adalah pemberhentian yang mengakibatkan seseorang kehilangan statusnya sebagai PPPK."
-            }, {
-                title: "Cuti PPPK",
-                description: "Cuti PPPK selanjutnya disebut dengan Cuti, adalah keadaan tidak masuk kerja yang diizinkan dalam jangka waktu tertentu."
             }, {
                 title: "Badan Kepegawaian Negara (BKN)",
                 description: "Badan Kepegawaian Negara adalah lembaga pemerintah nonkementerian yang diberi kewenangan melakukan pembinaan dan menyelenggarakan manajemen ASN secara nasional sebagaimana diatur dalam undang-undang."
@@ -327,7 +332,7 @@
                 "description": "Pemberhentian yang mengakibatkan PNS kehilangan statusnya sebagai PNS untuk sementara waktu."
             }, {
                 "title": "Pemberhentian Karena Mencapai Batas Usia Pensiun",
-                "description": "Batas usia di mana PNS harus diberhentikan dengan hormat dari status PNS:<br>a. 58 (lima puluh delapan) tahun bagi pejabat administrasi, pejabat fungsional ahli muda, pejabat fungsional ahli pertama, dan pejabat fungsional keterampilan;<br>b. 60 (enam puluh) tahun bagi pejabat pimpinan tinggi dan pejabat fungsional madya; dan<br>c. 65 (enam puluh lima) tahun bagi PNS yang memangku pejabat fungsional ahli utama."
+                "description": "Batas usia di mana PNS harus diberhentikan dengan hormat dari status PNS:<br>a. 58th : Pejabat Administrasi, Pejabat Fungsional Ahli Muda, Pejabat Fungsional Ahli Pertama, dan Pejabat Fungsional Keterampilan<br>b. 60 : Pejabat Pimpinan Tinggi dan Pejabat Fungsional Madya<br>c. 65 : PNS Pejabat Fungsional Ahli Utama."
             },
             {
                 "title": "Pemberhentian Karena Perampingan Organisasi atau Kebijakan Pemerintah",
@@ -362,9 +367,6 @@
                 "title": "Pendidikan dan Pelatihan Terintegrasi (Pelatihan Prajabatan)",
                 "description": "Proses pelatihan untuk membangun integritas moral, kejujuran, semangat dan motivasi nasionalisme, karakter kepribadian yang unggul dan bertanggung jawab, serta memperkuat profesionalisme dan kompetensi bagi calon PNS pada masa percobaan."
             }, {
-                "title": "Cuti PNS",
-                "description": "Keadaan tidak masuk kerja yang diizinkan dalam jangka waktu tertentu."
-            }, {
                 "title": "Sistem Informasi ASN",
                 "description": "Rangkaian informasi dan data mengenai Pegawai ASN yang disusun secara sistematis, menyeluruh, dan terintegrasi berbasis teknologi."
             }, {
@@ -391,7 +393,62 @@
                 "title": "Pemberhentian Dengan Hormat",
                 "description": "PNS diberhentikan dengan hormat karena:<br>a. Meninggal dunia;<br>b. Atas permintaan sendiri;<br>c. Mencapai batas usia pensiun;<br>d. Perampingan organisasi atau kebijakan pemerintah yang mengakibatkan pensiun dini;<br>e. Tidak cakap jasmani dan/atau rohani sehingga tidak dapat menjalankan tugas dan kewajiban."
             },
-
+            {
+                "title": "Cuti ASN",
+                "description": "<a target=\"_blank\" href=\"https://denpasar.bkn.go.id/kms/ensiklopedia:cuti_pns\"><b>REFERENSI denpasar.bkn.go.id</b></a><br>Keadaan tidak masuk kerja yang diizinkan dalam jangka waktu tertentu.<br>Cuti diberikan oleh PPK (Pejabat Pembina Kepegawaian). PPK bisa memberikan wewenang kepada pejabat di bawahnya untuk mengurus cuti. Untuk PNS yang bekerja di luar kementerian atau lembaga, cuti diberikan oleh pimpinan lembaga tersebut, kecuali untuk <u>cuti di luar tanggungan negara.</u>"
+            },
+            {
+                "title": "Jenis Cuti",
+                "description": "Cuti terdiri atas:<br>Lama | Syarat | Cuti<br>a. 12h | 1th | Cuti Tahunan<br>b. 3b | 5th | Cuti Besar<br>c. 14h | 0 | Cuti Sakit<br>d. 3b | 0 | Cuti Melahirkan<br>e. 1b | 0 | Cuti Karena Alasan Penting<br>f. Cuti Bersama<br>g. Cuti di Luar Tanggungan Negara."
+            },
+            {
+                "title": "Jenjang JF Keterampilan",
+                "description": "a. Penyelia;<br>b. Mahir;<br>c. Terampil;<br>d. Pemula"
+            },
+            {
+                "title": "Jenjang JF Keahlian",
+                "description": "a. Ahli Utama;<br>b. Ahli Madya;<br>c. Ahli Muda;<br>d. Ahli Pertama"
+            },
+            {
+                "title": "Jenjang JPT",
+                "description": "a. JPT Utama;<br>b. JPT Madya;<br>c. JPT Pratama"
+            },
+            {
+                "title": "Jenjang JA",
+                "description": "a. Jabatan Administrator;<br>b. Jabatan Pengawas; dan<br>c. Jabatan Pelaksana."
+            },
+            {
+                "title": "Syarat JPT Utama",
+                "description": "Syarat yang harus dipenuhi untuk dapat diangkat sebagai JPT Utama:<br>1. Memiliki kualifikasi pendidikan paling rendah sarjana atau diploma IV;<br>2. Memiliki Kompetensi Teknis, Kompetensi Manajerial, dan Kompetensi Sosial Kultural sesuai standar kompetensi Jabatan yang ditetapkan;<br>3. Memiliki pengalaman Jabatan dalam bidang tugas yang terkait dengan Jabatan yang akan diduduki secara kumulatif paling singkat selama 10 (sepuluh) tahun;<br>4. Sedang atau pernah menduduki JPT madya atau JF jenjang ahli utama paling singkat 2 (dua) tahun;<br>5. Memiliki rekam jejak Jabatan, integritas, dan moralitas yang baik;<br>6. Usia paling tinggi 58 (lima puluh delapan) tahun;<br>7. Sehat jasmani dan rohani."
+            },
+            {
+                "title": "Standar Kompetensi JF",
+                "description": "Setiap jenjang JF memiliki standar kompetensi yang terdiri  atas:<br>a. Kompetensi Teknis;<br>b. Kompetensi Manajerial; dan<br>c. Kompetensi Sosial Kultural."
+            },
+            {
+                "title": "Hak ASN",
+                "description": "PNS berhak memperoleh:<br>a. Gaji, tunjangan, dan fasilitas<br>b. Cuti<br>c. Jaminan pensiun dan jaminan hari tua<br>d. Perlindungan dan<br>e. Pengembangan kompetensi.<br><br>PPPK berhak memperoleh:<br>a. Gaji dan tunjangan<br>b. Cuti<br>c. Perlindungan<br>d. Pengembangan kompetensi.<br><br>Pengembangan Kompetensi antara lain melalui pendidikan dan elatihan, seminar, kursus, dan penataran."
+            },
+            {
+                "title": "Manajemen PNS",
+                "description": "Manajemen PNS meliputi:<br>a. Penyusunan dan penetapan kebutuhan;<br>b. Pengadaan;<br>c. Pangkat dan jabatan;<br>d. Pengembangan karier;<br>e. Pola karier;<br>f. Promosi;<br>g. Mutasi;<br>h. Penilaian kinerja;<br>i. Penggajian dan tunjangan;<br>j. Penghargaan;<br>k. Disiplin;<br>l. Pemberhentian;<br>m. Jaminan pensiun dan jaminan hari tua; dan<br>n. Perlindungan."
+            },
+            {
+                "title": "Syarat Diangkat Menjadi PNS",
+                "description": "Syarat yang harus dipenuhi untuk diangkat menjadi PNS:<br>a. Lulus pendidikan dan pelatihan;<br>b. Sehat jasmani dan rohani."
+            },
+            {
+                "title": "Batas Usia PPPK",
+                "description": "Batas usia PPPK:<br>a. 58th : Pejabat Fungsional Ahli Muda, Pejabat Fungsional Ahli Pertama, dan Pejabat Fungsional kategori keterampilan;<br>b. 60th : Pejabat Pimpinan Tinggi dan Pejabat Fungsional Madya; dan<br>c. 65th : Jabatan fungsional Ahli Utama."
+            },
+            {
+                "title": "Tingkat dan Jenis Hukuman Disiplin",
+                "description": "a. Hukuman Disiplin ringan;<br>b. Hukuman Disiplin sedang; atau<br>c. Hukuman Disiplin berat.<br><br>(1) Hukuman Disiplin Ringan <br>a. teguran lisan;<br>b. teguran tertulis; atau<br>c. pernyataan tidak puas secara tertulis.<br><br>(2) Hukuman Disiplin Sedang <br>a. pemotongan tunjangan kinerja sebesar 25% selama 6 bulan;<br>b. pemotongan tunjangan kinerja sebes selama 9 bulan; atau<br>c. pemotongan tunjangan kinerja sebesar 25% selama 12bulan.<br><br>(3) Hukuman Disiplin Berat <br>a. penurunan jabatan setingkat lebih rendah selama 12bulan;<br>b. pembebasan dari jabatannya menjadi jabatan pelaksana selama 12 bulan; dan<br>c. pemberhentian dengan hormat tidak atas permintaan sendiri sebagai PNS."
+            },
+            {
+                "title": "Disiplin PNS dalam mematuhi ketentuan jam kerja",
+                "description": "Pemotongan Tunjangan Kinerja:<br>a. 11-13 hari: Pemotongan 25% selama 6 bulan;<br>b. 14-16 hari: Pemotongan 25% selama 9 bulan;<br>c. 17-20 hari: Pemotongan 25% selama 12 bulan.<br><br>Penurunan Jabatan dan Pembebasan Jabatan:<br>a. 21-24 hari: Penurunan jabatan setingkat lebih rendah selama 12 bulan;<br>b. 25-27 hari: Pembebasan dari jabatan struktural ke jabatan pelaksana selama 12 bulan.<br><br>Pemberhentian dengan Hormat Tidak atas Permintaan Sendiri:<br>a. 28 hari atau lebih dalam satu tahun;<br>b. 10 hari berturut-turut tanpa alasan yang sah."
+            },
 
         ];
 
@@ -408,26 +465,61 @@
             // Function to display glossary items
             function displayGlossary(data, searchText = '') {
                 $("#glossary-container").empty(); // Clear existing items
-                data.forEach((item, index) => {
-                    // Apply highlighting if there is a search term
-                    const title = searchText ? highlightText(item.title, searchText) : item.title;
-                    const description = searchText ? highlightText(item.description, searchText) : item.description;
+                data
+                    .sort((a, b) => {
+                        const aHasSearchTextInTitle = a.title.toLowerCase().includes(searchText.toLowerCase());
+                        const aHasSearchTextInDescription = a.description.toLowerCase().includes(searchText.toLowerCase());
+                        const bHasSearchTextInTitle = b.title.toLowerCase().includes(searchText.toLowerCase());
+                        const bHasSearchTextInDescription = b.description.toLowerCase().includes(searchText.toLowerCase());
 
-                    const glossaryItem = `
-                        <div class="p-4 bg-secondary rounded-lg shadow-md">
-                            <h2 class="text-xl font-semibold text-primary mb-2">${index + 1}. ${title}</h2>
-                            <p class="text-gray-700">${description}</p>
-                        </div>
-                    `;
-                    $("#glossary-container").append(glossaryItem);
+                        if (aHasSearchTextInTitle && aHasSearchTextInDescription) {
+                            return -1;
+                        } else if (bHasSearchTextInTitle && bHasSearchTextInDescription) {
+                            return 1;
+                        } else if (aHasSearchTextInTitle) {
+                            return -1;
+                        } else if (bHasSearchTextInTitle) {
+                            return 1;
+                        } else if (aHasSearchTextInDescription) {
+                            return -1;
+                        } else if (bHasSearchTextInDescription) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    })
+                    .forEach((item) => {
+                        // Apply highlighting if there is a search term
+                        const title = searchText ? highlightText(item.title, searchText) : item.title;
+                        const description = searchText ? highlightText(item.description, searchText) : item.description;
+
+                        const glossaryItem = `
+                            <div data-title="${item.title}" class="p-4 bg-secondary rounded-lg shadow-md ${localStorage.getItem(`glossary-item-${item.title}`) === 'true' ? 'active' : ''}">
+                                <h2 class="text-xl font-semibold text-primary mb-2">${title}</h2>
+                                <p class="text-gray-700">${description}</p>
+                            </div>
+                        `;
+                        $("#glossary-container").append(glossaryItem);
+                    });
+
+                // Toggle rounded-lg class on floating search box
+                $('[data-title]').click(function () {
+                    const title = $(this).attr('data-title');
+                    $(this).toggleClass('active');
+                    localStorage.setItem(`glossary-item-${title}`, $(this).hasClass('active'));
                 });
             }
 
             // Initial display of all items
-            displayGlossary(sortedData);
+            const initialSearchText = localStorage.getItem('search-text') || '';
+            displayGlossary(sortedData, initialSearchText);
+            $("#floating-search").val(initialSearchText);
+            $(".search").val(initialSearchText);
+            console.log(initialSearchText);
+
 
             // Search functionality
-            $("#search").on("input", function () {
+            $(".search").on("input", function () {
                 const searchText = $(this).val().toLowerCase();
                 const searchTextWithoutSpace = searchText.trim();
                 const filteredData = sortedData.filter(item =>
@@ -436,28 +528,27 @@
                 );
 
                 displayGlossary(filteredData, searchText);
+                localStorage.setItem('search-text', searchText);
             });
-            const searchInput = document.getElementById('search');
-            const floatingSearch = document.getElementById('floating-search');
+            const searchInput = $('.search');
+            const floatingSearch = $('#floating-search');
 
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 100) { // Show floating box after scrolling 100px
-                    floatingSearch.classList.remove('hidden');
+                    floatingSearch.show();
                 } else {
-                    floatingSearch.classList.add('hidden');
+                    floatingSearch.hide();
                 }
             });
 
             // Sync input between the two search boxes
-            searchInput.addEventListener('input', (e) => {
-                floatingSearch.querySelector('input').value = e.target.value;
+            $('#fixed-search .search').on('input', function () {
+                $('#floating-search .search').val($(this).val());
+            });
+            $('#floating-search .search').on('input', function () {
+                $('#fixed-search .search').val($(this).val()).trigger('input');
+            });
 
-            });
-            floatingSearch.querySelector('input').addEventListener('input', (e) => {
-                searchInput.value = e.target.value;
-                const event = new Event('input');
-                searchInput.dispatchEvent(event);
-            });
         });
     </script>
 </body>
